@@ -1,0 +1,33 @@
+From 525bd9c17931be5c3e2d37dbd3be6d0ad5cb6c32 Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Tue, 14 Feb 2023 20:47:40 +0800
+Subject: [PATCH 04/11] io_frida_agent_so
+
+---
+ src/linux/linux-host-session.vala | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/src/linux/linux-host-session.vala b/src/linux/linux-host-session.vala
+index 7434eadd..cf539ad7 100644
+--- a/src/linux/linux-host-session.vala
++++ b/src/linux/linux-host-session.vala
+@@ -128,12 +128,13 @@ namespace Frida {
+ 			var blob64 = Frida.Data.Agent.get_frida_agent_64_so_blob ();
+ 			var emulated_arm = Frida.Data.Agent.get_frida_agent_arm_so_blob ();
+ 			var emulated_arm64 = Frida.Data.Agent.get_frida_agent_arm64_so_blob ();
+-			agent = new AgentDescriptor (PathTemplate ("frida-agent-<arch>.so"),
++			var random_prefix = GLib.Uuid.string_random();
++			agent = new AgentDescriptor (PathTemplate (random_prefix + "-<arch>.so"),
+ 				new Bytes.static (blob32.data),
+ 				new Bytes.static (blob64.data),
+ 				new AgentResource[] {
+-					new AgentResource ("frida-agent-arm.so", new Bytes.static (emulated_arm.data), tempdir),
+-					new AgentResource ("frida-agent-arm64.so", new Bytes.static (emulated_arm64.data), tempdir),
++					new AgentResource (random_prefix + "-arm.so", new Bytes.static (emulated_arm.data), tempdir),
++					new AgentResource (random_prefix + "-arm64.so", new Bytes.static (emulated_arm64.data), tempdir),
+ 				},
+ 				AgentMode.INSTANCED,
+ 				tempdir);
+-- 
+2.34.1
+

@@ -1,0 +1,24 @@
+From d8b7ccec8754c53a32cb4d0d5158ee6c55e8f021 Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Tue, 14 Feb 2023 20:44:15 +0800
+Subject: [PATCH 02/11] pipe_linjector
+
+---
+ src/freebsd/binjector-glue.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/freebsd/binjector-glue.c b/src/freebsd/binjector-glue.c
+index 2bdce0ae..af5c76e4 100644
+--- a/src/freebsd/binjector-glue.c
++++ b/src/freebsd/binjector-glue.c
+@@ -805,7 +805,7 @@ frida_inject_instance_init_fifo (FridaInjectInstance * self)
+ {
+   const int mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH;
+ 
+-  self->fifo_path = g_strdup_printf ("%s/binjector-%u", self->temp_path, self->id);
++  self->fifo_path = g_strdup_printf ("%s/%p-%u", self->temp_path, self->id);
+ 
+   mkfifo (self->fifo_path, mode);
+   chmod (self->fifo_path, mode);
+-- 
+2.39.2 (Apple Git-143)
