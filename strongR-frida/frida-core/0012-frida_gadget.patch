@@ -1,3 +1,7 @@
+From: Your Name <you@example.com>
+Date: Thu, 23 Nov 2023 21:00:04 +0800
+Subject: [PATCH 11/12] frida_gadget
+
 diff --git a/lib/gadget/gadget-glue.c b/lib/gadget/gadget-glue.c
 index 256b8d99..05ac19ca 100644
 --- a/lib/gadget/gadget-glue.c
